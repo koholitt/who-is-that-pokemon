@@ -1,12 +1,22 @@
 import { useState } from "react";
-import { FetchPokemon } from "./PokeApi";
+import { useFetchPokemon } from "./PokeApi";
 
-export function pokemonCard(){
-    const [pokemonId, setPokemonId] = useState(Math.floor(Math.random() * 1164)+ 1)
-    
+export function PokemonCard(){
+    const [pokemonId, setPokemonId] = useState(Math.floor(Math.random() * 1024)+ 1);
+    const [currentInput, setCurrentInput] = useState('');
+    const {pokemonData, isLoading} = useFetchPokemon(pokemonId); //custom hook!?
+
+    if (isLoading) return <p>. . .</p>
+
+    function checkAnswer(){
+        const newId = Math.floor(Math.random() * 1164)+ 1;
+       return setPokemonId(newId);
+    }
+
     return(
         <div>
-            <FetchPokemon id={pokemonId} />
+            <input type="text" name="pokemonName" onChange={e => setCurrentInput(e.target.value)}/>
+            <button type="submit" onClick={checkAnswer}>Done!</button>
         </div>
     )
 }
