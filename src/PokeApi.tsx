@@ -18,8 +18,11 @@ export function FetchPokemon({id}:FetchPokemonProps){ //:type annotations used f
         const fetchData = async () =>{
             try{
                 const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                if(!response.ok){
+                   // response.ok is true if status 200-299 
+                   throw new Error("Pokemon not found");
+                }
                 const data = await response.json();
-
                 setPokemonData(data);
 
             }catch(error){
