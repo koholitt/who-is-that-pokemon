@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
 
-interface FetchPokemonProps{ //:type interface used for data that the function recives
-    id: number;
-}
-
 interface Pokemon{ 
     sprites: {
         front_default: string
@@ -11,8 +7,8 @@ interface Pokemon{
     name: string;
 }
 
-export function useFetchPokemon({id}:FetchPokemonProps){ //:type annotations used for data that the function recives
-    const [pokemonData, setPokemonData] = useState<Pokemon|null>(null); //generics <> tells a tool what type of data to work with ()
+export function useFetchPokemon(id:number){ //:type annotations used for data that the function recives
+    const [pokemonData, setPokemonData] = useState<Pokemon|null>(); //generics <> tells a tool what type of data to work with ()
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(()=>{
