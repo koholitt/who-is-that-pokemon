@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useFetchPokemon } from "./PokeApi";
+import styles from './PokemonCard.module.css';
 
 export function PokemonCard(){
     const [pokemonId, setPokemonId] = useState(Math.floor(Math.random() * 1024)+ 1);
@@ -29,19 +30,17 @@ export function PokemonCard(){
     }
 
     return(
-        <>
-            <div>
+        <div className={styles.container}>
+            <div className={styles.score}>
                 <p>Score {currentScore.score}</p>
                 <p>Best {currentScore.bestScore}</p>
             </div>
 
-            <div>
+            <div className={styles.card}>
                 <img src={pokemonData?.sprites.front_default} alt={pokemonData?.name} />
                 <input type="text" name="pokemonName" onChange={e => setCurrentInput(e.target.value)}/>
                 <button type="submit" onClick={checkAnswer}>Done!</button>
             </div>
-        </>
-
-        
+        </div>
     )
 }
